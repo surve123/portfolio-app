@@ -1,9 +1,7 @@
 package com.shreyassurve.portfolio.contact;
 
-import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -19,12 +17,6 @@ public class ContactController {
     private final EmailService emailService;
     private final RateLimiter rateLimiter;
 
-    @Value("${spring.mail.username:}")
-    private String mailUsername;
-
-    @Value("${spring.mail.password:}")
-    private String mailPassword;
-
     public ContactController(EmailService emailService, RateLimiter rateLimiter) {
         this.emailService = emailService;
         this.rateLimiter = rateLimiter;
@@ -34,7 +26,7 @@ public class ContactController {
     public Map<String, Object> health() {
         Map<String, Object> body = new HashMap<>();
         body.put("ok", true);
-        body.put("emailConfigured", !mailUsername.isBlank() && !mailPassword.isBlank());
+        body.put("emailConfigured", emailService.isConfigured());
         return body;
     }
 
@@ -49,7 +41,7 @@ public class ContactController {
                     .body(Map.of("error", "Too many requests. Please try again in a minute."));
         }
 
-        if (mailUsername.isBlank() || mailPassword.isBlank()) {
+        if (!emailService.isConfigured()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error",
                             "Email is not configured on the server yet. Please email me directly instead."));
@@ -58,7 +50,7 @@ public class ContactController {
         try {
             emailService.sendContactEmail(request);
             return ResponseEntity.ok(Map.of("ok", true));
-        } catch (MessagingException e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "Failed to send the message. Please try again shortly."));
         }
