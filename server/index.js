@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Where contact-form messages should land. Defaults to your own inbox.
-const TO_EMAIL = process.env.TO_EMAIL || "shreyas.surve02@gmail.com";
+const TO_EMAIL = process.env.TO_EMAIL || "shreyassurve02@gmail.com";
 
 // Allow the deployed client's origin to call this API. In local dev, Vite's
 // proxy makes this a non-issue, but CORS still matters once both are deployed.

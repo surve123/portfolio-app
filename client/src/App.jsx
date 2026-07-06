@@ -284,7 +284,7 @@ export default function App() {
           <div className="socials">
             <a href="https://github.com/surve123" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
             <a href="https://www.linkedin.com/in/shreyas-surve-818017195" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-            <a href="mailto:shreyas.surve02@gmail.com">Email ↗</a>
+            <a href="mailto:shreyassurve02@gmail.com">Email ↗</a>
           </div>
         </section>
 
@@ -384,7 +384,7 @@ export default function App() {
               <h3>Get in touch</h3>
               <p>Open to full stack and backend engineering roles. I usually reply within a day.</p>
 
-              <a className="contact-link" href="mailto:shreyas.surve02@gmail.com">✉ shreyas.surve02@gmail.com</a>
+              <a className="contact-link" href="mailto:shreyassurve02@gmail.com">✉ shreyassurve02@gmail.com</a>
               <a className="contact-link" href="https://github.com/surve123" target="_blank" rel="noopener noreferrer">⌥ github.com/surve123</a>
               <a className="contact-link" href="https://www.linkedin.com/in/shreyas-surve-818017195" target="_blank" rel="noopener noreferrer">in linkedin.com/in/shreyas-surve</a>
 

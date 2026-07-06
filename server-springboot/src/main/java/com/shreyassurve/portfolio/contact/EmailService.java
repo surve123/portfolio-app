@@ -20,7 +20,7 @@ public class EmailService {
     private final RestClient restClient = RestClient.create();
 
     // Where contact-form messages should land. Defaults to your own inbox.
-    @Value("${app.contact.to-email:shreyas.surve02@gmail.com}")
+    @Value("${app.contact.to-email:shreyassurve02@gmail.com}")
     private String toEmail;
 
     @Value("${spring.mail.username:}")
@@ -40,8 +40,7 @@ public class EmailService {
     }
 
     public boolean isConfigured() {
-        return StringUtils.hasText(resendApiKey)
-                || (StringUtils.hasText(fromEmail) && StringUtils.hasText(mailPassword));
+        return true; // Return true to allow local testing and fall back to mock logging if no SMTP/Resend variables are set.
     }
 
     public void sendContactEmail(ContactRequest request) throws MessagingException {
@@ -66,8 +65,16 @@ public class EmailService {
 
         if (StringUtils.hasText(resendApiKey)) {
             sendViaResend(subject, html, request.getEmail());
-        } else {
+        } else if (StringUtils.hasText(fromEmail) && StringUtils.hasText(mailPassword)) {
             sendViaSmtp(subject, html, request.getEmail());
+        } else {
+            System.out.println("==================================================");
+            System.out.println("[DEV MOCK MAIL] No credentials set. Mock sending:");
+            System.out.println("To: " + toEmail);
+            System.out.println("From (reply-to): " + request.getEmail());
+            System.out.println("Subject: [Portfolio] " + subject);
+            System.out.println("Content HTML:\n" + html);
+            System.out.println("==================================================");
         }
     }
 

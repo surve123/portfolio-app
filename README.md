@@ -12,7 +12,7 @@ portfolio-app/
 ```
 
 Both backends expose the same API: `POST /api/contact` → emails the message
-to `shreyas.surve02@gmail.com` (or whatever `TO_EMAIL` you set).
+to `shreyassurve02@gmail.com` (or whatever `TO_EMAIL` you set).
 
 ## Why Spring Boot
 
@@ -41,7 +41,7 @@ Set these as environment variables (don't commit real credentials to
 |---|---|
 | `MAIL_USERNAME` | Gmail address that sends the email |
 | `MAIL_PASSWORD` | Gmail **App Password** (not your normal password — see below) |
-| `TO_EMAIL` | Where messages land (defaults to `shreyas.surve02@gmail.com`) |
+| `TO_EMAIL` | Where messages land (defaults to `shreyassurve02@gmail.com`) |
 | `APP_CORS_ALLOWED_ORIGINS` | Your deployed client URL in production (defaults to `*`) |
 | `PORT` | Defaults to `5000` |
 
